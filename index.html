@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        var print = true;
+        for (var i = 0; i < 7; i++) {
+            for (var x = 0; x < 7; x++) {
+                if (print) {
+                    console.log("#")
+                    print = false;
+                } else {
+                    console.log(" ")
+                    print = false;
+                }
+            }
+            print = print ? false : true;
+        }
+
+        function testMerge() {
+            console.log("Module Started");
+            console.log([1, 12, 5, 26, 7, 14, 3, 7, 2]);
+            console.log(mergeSort([1, 12, 5, 26, 7, 14, 3, 7, 2]));
+            // console.log(mergeSort([51, 95, 66, 72, 42, 38, 39, 41, 15]));
+            // console.log(mergeSort([2, 4, 1, 6, 8, 5, 3, 7]));
+
+            function merge(leftArray, rightArray, arr) {
+                console.log(' Main array: ' + arr);
+                console.log(' Left array: ' + leftArray);
+                console.log(' Reft array: ' + rightArray);
+
+                var lenLeft = leftArray.length,
+                    lenRight = rightArray.length,
+                    i = 0,
+                    j = 0,
+                    k = 0;
+
+                while (i < lenLeft && j < lenRight) {
+                    if (leftArray[i] <= rightArray[j]) {
+                        arr[k] = leftArray[i];
+                        i++;
+                    } else {
+                        arr[k] = rightArray[j];
+                        j++;
+                    }
+                    k++;
+                }
+                while (i < lenLeft) {
+                    arr[k] = leftArray[i];
+                    i++;
+                    k++;
+                }
+                while (j < lenRight) {
+                    arr[k] = rightArray[j];
+                    j++;
+                    k++;
+                }
+            }
+
+            function mergeSort(arr) {
+                if (arr.length < 2) return arr;
+                else {
+                    var p = 0,
+                        r = arr.length - 1;
+                    var mid = (p + r) / 2 | 0;
+
+                    var left = arr.slice(0, mid + 1),
+                        right = arr.slice(mid + 1, arr.length);
+
+                    mergeSort(left);
+
+                    mergeSort(right);
+
+                    merge(left, right, arr);
+                }
+                return arr;
+            }
+
+
+        }
+        testMerge();
+    </script>
+</head>
+
+<body>
+    <form action="/action_page.php">
+        First name: <input type="text" name="FirstName" value="Mickey"><br> Last name: <input type="text" name="LastName" value="Mouse"><br>
+        <input type="submit" value="Submit">
+    </form>
+    <p>Click the "Submit" button and the form-data will be sent to a page on the server called "/action_page.php".</p>
+</body>
+
+</html>
